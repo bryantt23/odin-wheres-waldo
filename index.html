@@ -7,27 +7,31 @@
     <style>
       .avatar-container {
         position: relative;
-        display: inline-block;
+        display: inline-block; /* Or 'block' depending on your layout */
+        width: 100px; /* Match this to your avatar image width */
+        height: 100px; /* Match this to your avatar image height */
+        padding-bottom: 50px;
       }
 
       .avatar {
+        width: 100%;
+        height: 100%;
         display: block;
-        margin-bottom: 10px;
       }
 
       .red-x {
-        display: none;
+        display: none; /* Hidden by default */
         position: absolute;
-        top: 0;
+        top: 22px;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100%;
+        height: 150%;
+        font-size: 126px; /* Big enough to cover the container */
         color: red;
         font-weight: bold;
-        z-index: 2;
+        z-index: 10; /* Above the avatar */
         text-align: center;
-        font-size: 50px;
-        line-height: 50px;
+        line-height: 100px; /* Match this to your avatar container height */
       }
 
       .custom-cursor {
@@ -52,16 +56,37 @@
   </head>
   <body>
     <h1>Where's Waldo?</h1>
-    <div class="avatar-container">
-      Waldo: <img class="avatar" id="waldo-avatar" src="waldo-avatar.png" />
+
+    <div class="avatar-container" id="container-waldo">
+      Waldo:
+      <img
+        class="avatar"
+        id="waldo-avatar"
+        src="waldo-avatar.png"
+        alt="Waldo"
+      />
       <span class="red-x" id="waldo-x">X</span>
     </div>
-    <div class="avatar-container">
-      Wenda: <img class="avatar" id="wenda-avatar" src="wenda-avatar.png" />
+
+    <div class="avatar-container" id="container-wenda">
+      Wenda:
+      <img
+        class="avatar"
+        id="wenda-avatar"
+        src="wenda-avatar.png"
+        alt="Wenda"
+      />
       <span class="red-x" id="wenda-x">X</span>
     </div>
-    <div class="avatar-container">
-      Wizard: <img class="avatar" id="wizard-avatar" src="wizard-avatar.png" />
+
+    <div class="avatar-container" id="container-wizard">
+      Wizard:
+      <img
+        class="avatar"
+        id="wizard-avatar"
+        src="wizard-avatar.png"
+        alt="Wizard"
+      />
       <span class="red-x" id="wizard-x">X</span>
     </div>
 
@@ -70,7 +95,6 @@
       <div class="custom-cursor" id="customCursor"></div>
     </div>
     <p>Timer: <span id="timer">0</span> seconds</p>
-    <p>Coordinates: <span id="coords"></span></p>
 
     <script src="script.js"></script>
   </body>
