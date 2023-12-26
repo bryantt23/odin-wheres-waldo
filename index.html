@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .custom-cursor {
+        position: absolute;
+        width: 50px; /* Width of the custom cursor box */
+        height: 50px; /* Height of the custom cursor box */
+        border: 3px solid #000; /* Border of the custom cursor box */
+        pointer-events: none; /* Ignore the custom cursor when calculating mouse events */
+        display: none; /* Hide by default */
+        z-index: 1000; /* Ensure the cursor is above other elements */
+      }
+
+      /* Add a class to hide the default cursor over the image */
+      .hide-cursor {
+        cursor: none;
+      }
+    </style>
   </head>
   <body>
     <h1>Where's Waldo?</h1>
-    <img src="waldo.png" id="waldoImage" />
+    <div style="position: relative">
+      <!-- Container for image and custom cursor -->
+      <img src="waldo.png" id="waldoImage" class="hide-cursor" />
+      <div class="custom-cursor" id="customCursor"></div>
+    </div>
     <p>Coordinates: <span id="coords"></span></p>
     <script src="script.js"></script>
   </body>
