@@ -3,32 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Where's Waldo?</title>
     <style>
-      .custom-cursor {
-        position: absolute;
-        width: 50px; /* Width of the custom cursor box */
-        height: 50px; /* Height of the custom cursor box */
-        border: 3px solid #000; /* Border of the custom cursor box */
-        pointer-events: none; /* Ignore the custom cursor when calculating mouse events */
-        display: none; /* Hide by default */
-        z-index: 1000; /* Ensure the cursor is above other elements */
+      .avatar-container {
+        position: relative;
+        display: inline-block;
       }
 
-      /* Add a class to hide the default cursor over the image */
+      .avatar {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .red-x {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: red;
+        font-weight: bold;
+        z-index: 2;
+        text-align: center;
+        font-size: 50px;
+        line-height: 50px;
+      }
+
+      .custom-cursor {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border: 3px solid #000;
+        pointer-events: none;
+        display: none;
+        z-index: 1000;
+      }
+
       .hide-cursor {
         cursor: none;
+      }
+
+      .disabled {
+        pointer-events: none;
+        opacity: 0.5;
       }
     </style>
   </head>
   <body>
     <h1>Where's Waldo?</h1>
+    <div class="avatar-container">
+      Waldo: <img class="avatar" id="waldo-avatar" src="waldo-avatar.png" />
+      <span class="red-x" id="waldo-x">X</span>
+    </div>
+    <div class="avatar-container">
+      Wenda: <img class="avatar" id="wenda-avatar" src="wenda-avatar.png" />
+      <span class="red-x" id="wenda-x">X</span>
+    </div>
+    <div class="avatar-container">
+      Wizard: <img class="avatar" id="wizard-avatar" src="wizard-avatar.png" />
+      <span class="red-x" id="wizard-x">X</span>
+    </div>
+
     <div style="position: relative">
-      <!-- Container for image and custom cursor -->
       <img src="waldo.png" id="waldoImage" class="hide-cursor" />
       <div class="custom-cursor" id="customCursor"></div>
     </div>
+    <p>Timer: <span id="timer">0</span> seconds</p>
     <p>Coordinates: <span id="coords"></span></p>
+
     <script src="script.js"></script>
   </body>
 </html>

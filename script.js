@@ -1,7 +1,13 @@
+const foundObject = { waldo: false, wenda: false, wizard: false };
+let timerInterval = null;
+let timeElapsed = 0;
+
 document.addEventListener('DOMContentLoaded', function () {
   const img = document.getElementById('waldoImage');
   const customCursor = document.getElementById('customCursor');
   const coordsDisplay = document.getElementById('coords');
+  const timerDisplay = document.getElementById('timer');
+  startTimer();
 
   img.addEventListener('mousemove', function (event) {
     const rect = img.getBoundingClientRect();
@@ -17,6 +23,41 @@ document.addEventListener('DOMContentLoaded', function () {
   img.addEventListener('mouseleave', function (event) {
     customCursor.style.display = 'none';
   });
+
+  img.addEventListener('click', function (event) {
+    const rect = img.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const character = getCharacter(x, y);
+    if (character) {
+      foundObject[character] = true;
+      document.getElementById(`${character}-x`).style.display = 'block'; // Show the red "X"
+
+      if (allCharactersFound()) {
+        clearInterval(timerInterval); // Stop the timer
+        img.style.opacity = '0.5'; // Set image opacity to 50%
+        img.style.pointerEvents = 'none'; // Disable mouse events on the image
+        // Set found avatars to have a red X
+        for (const character in foundObject) {
+          if (
+            foundObject.hasOwnProperty(character) &&
+            foundObject[character] === true
+          ) {
+            const avatar = document.getElementById(`${character}-avatar`);
+            avatar.classList.add('found'); // Add the 'found' class to show the red X
+          }
+        }
+      }
+    }
+  });
+
+  function startTimer() {
+    timerInterval = setInterval(function () {
+      timeElapsed += 10; // Update time in milliseconds
+      const seconds = (timeElapsed / 1000).toFixed(1); // Convert to seconds with 1 decimal place
+      timerDisplay.textContent = `${seconds}`; // Update timer display
+    }, 10);
+  }
 });
 
 function getCharacter(px, py) {
@@ -33,4 +74,8 @@ function getCharacter(px, py) {
 
 function between(num, min, max) {
   return num >= min && num <= max;
+}
+
+function allCharactersFound() {
+  return foundObject.waldo && foundObject.wenda && foundObject.wizard;
 }
