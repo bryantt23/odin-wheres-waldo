@@ -7,7 +7,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const customCursor = document.getElementById('customCursor');
   const coordsDisplay = document.getElementById('coords');
   const timerDisplay = document.getElementById('timer');
-  startTimer();
+  const startButton = document.getElementById('start-game');
+  const gameContainer = document.getElementById('game-container');
+
+  startButton.addEventListener('click', function () {
+    gameContainer.style.display = 'block';
+    startButton.style.display = 'none';
+    startTimer();
+  });
 
   img.addEventListener('mousemove', function (event) {
     const rect = img.getBoundingClientRect();
@@ -34,22 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById(`${character}-x`).style.display = 'block'; // Show the red "X"
 
       if (allCharactersFound()) {
-        clearInterval(timerInterval); // Stop the timer
         img.style.opacity = '0.5'; // Set image opacity to 50%
         img.style.pointerEvents = 'none'; // Disable mouse events on the image
-        // Set found avatars to have a red X
-        for (const character in foundObject) {
-          if (
-            foundObject.hasOwnProperty(character) &&
-            foundObject[character] === true
-          ) {
-            const avatar = document.getElementById(`${character}-avatar`);
-            avatar.classList.add('found'); // Add the 'found' class to show the red X
-          }
-        }
+        endGame();
       }
     }
   });
+
+  function endGame() {
+    clearInterval(timerInterval);
+    alert(`You found Waldo and friends in ${timeElapsed / 1000} seconds!`);
+  }
 
   function startTimer() {
     timerInterval = setInterval(function () {

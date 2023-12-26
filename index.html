@@ -52,50 +52,55 @@
         pointer-events: none;
         opacity: 0.5;
       }
+      #game-container {
+        display: none; /* Hide game container initially */
+      }
     </style>
   </head>
   <body>
     <h1>Where's Waldo?</h1>
+    <button id="start-game">Start Searching for Waldo</button>
 
-    <div class="avatar-container" id="container-waldo">
-      Waldo:
-      <img
-        class="avatar"
-        id="waldo-avatar"
-        src="waldo-avatar.png"
-        alt="Waldo"
-      />
-      <span class="red-x" id="waldo-x">X</span>
+    <div id="game-container">
+      <div class="avatar-container" id="container-waldo">
+        Waldo:
+        <img
+          class="avatar"
+          id="waldo-avatar"
+          src="waldo-avatar.png"
+          alt="Waldo"
+        />
+        <span class="red-x" id="waldo-x">X</span>
+      </div>
+
+      <div class="avatar-container" id="container-wenda">
+        Wenda:
+        <img
+          class="avatar"
+          id="wenda-avatar"
+          src="wenda-avatar.png"
+          alt="Wenda"
+        />
+        <span class="red-x" id="wenda-x">X</span>
+      </div>
+
+      <div class="avatar-container" id="container-wizard">
+        Wizard:
+        <img
+          class="avatar"
+          id="wizard-avatar"
+          src="wizard-avatar.png"
+          alt="Wizard"
+        />
+        <span class="red-x" id="wizard-x">X</span>
+      </div>
+      <p>Timer: <span id="timer">0</span> seconds</p>
+
+      <div style="position: relative">
+        <img src="waldo.png" id="waldoImage" class="hide-cursor" />
+        <div class="custom-cursor" id="customCursor"></div>
+      </div>
     </div>
-
-    <div class="avatar-container" id="container-wenda">
-      Wenda:
-      <img
-        class="avatar"
-        id="wenda-avatar"
-        src="wenda-avatar.png"
-        alt="Wenda"
-      />
-      <span class="red-x" id="wenda-x">X</span>
-    </div>
-
-    <div class="avatar-container" id="container-wizard">
-      Wizard:
-      <img
-        class="avatar"
-        id="wizard-avatar"
-        src="wizard-avatar.png"
-        alt="Wizard"
-      />
-      <span class="red-x" id="wizard-x">X</span>
-    </div>
-
-    <div style="position: relative">
-      <img src="waldo.png" id="waldoImage" class="hide-cursor" />
-      <div class="custom-cursor" id="customCursor"></div>
-    </div>
-    <p>Timer: <span id="timer">0</span> seconds</p>
-
     <script src="script.js"></script>
   </body>
 </html>
